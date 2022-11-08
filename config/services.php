@@ -32,6 +32,7 @@ return [
     ],
 
     'cluster_services' => [
+        'md_seller_service' => ['base_uri' => env('MD_SELLER_SERVICE_BASE_URL')],
     ]
 
 ];
