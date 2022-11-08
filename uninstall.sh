@@ -1,4 +1,4 @@
-app_name="api_gateway"
+app_name="md_api_gateway"
 
 default_path="/var/www/html"
 #default_path="/home/jose/Descargas/new/template"
