@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MdFileController;
 use App\Http\Controllers\MdSellerController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -15,3 +16,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::apiResource('seller', MdSellerController::class);
+Route::apiResource('file', MdFileController::class);

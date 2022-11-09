@@ -13,6 +13,12 @@ mv $default_path/docker $tmp_path/
 echo '#### mv $default_path/lang/es $tmp_path/'
 mv $default_path/lang/es $tmp_path/
 
+echo '#### mv $default_path/app/Helpers $tmp_path/'
+mv $default_path/app/Helpers $tmp_path/
+
+echo '#### mv $default_path/stubs $tmp_path/'
+mv $default_path/stubs $tmp_path/
+
 echo '#### mv $default_path/database/migrations $tmp_path/'
 mv $default_path/database/migrations $tmp_path/
 

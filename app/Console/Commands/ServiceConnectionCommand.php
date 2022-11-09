@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Helpers\StubFormatter;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
@@ -47,22 +48,30 @@ class ServiceConnectionCommand extends Command
      */
     public function handle()
     {
-        $path = $this->getSourceFilePath();
-        $pathController = $this->getSourceFilePathController();
+        $path_service = base_path('app/Services')."/".$this->getClassName($this->argument('name')) . 'Service.php';
+        $path_controller = base_path('app/Http/Controllers') .'/' .$this->getClassName($this->argument('name')) . 'Controller.php';
 
-        $this->makeDirectory(dirname($path));
-        $this->makeDirectory(dirname($pathController));
-
-        $contents = $this->getSourceFile($this->getStubPath(), $this->getStubVariables());
-        $controllerContents = $this->getSourceFile($this->getStubPathController(), $this->getStubVariables());
-
-        if (!$this->files->exists($path)) {
+        if (!$this->files->exists($path_service) && !$this->files->exists($path_controller)) {
             $this->comment('Creando servicio ...');
-            $this->files->put($path, $contents);
-            $this->info('File : {$path} created');
+            $path_stub_service = __DIR__ . '/../../../stubs/service.stub';
+            $formatter_service = new StubFormatter(
+                $path_service,
+                $this->getStubVariables(),
+                $path_stub_service,
+                $this->files
+            );
+            $formatter_service->make();
+            $this->info('Servicio creado con éxito');
 
             $this->comment('Creando controlador ...');
-            $this->files->put($pathController, $controllerContents);
+            $path_stub_controller = __DIR__ . '/../../../stubs/service-controller.stub';
+            $formatter_controller = new StubFormatter(
+                $path_controller,
+                $this->getStubVariables(),
+                $path_stub_controller,
+                $this->files
+            );
+            $formatter_controller->make();
             $this->info('Controlador creado con éxito');
 
             $this->comment('Agregando rutas ...');
@@ -74,23 +83,8 @@ class ServiceConnectionCommand extends Command
             $this->addServiceConfig();
             $this->info('Variables agregadas con éxito');
         } else {
-            $this->error('File : {$path} already exits');
+            $this->error('Ya existe un servicio o controlador con el nombre sugerido "'.$this->argument('name').'"');
         }
-    }
-
-    /**
-     * Build the directory for the class if necessary.
-     *
-     * @param  string  $path
-     * @return string
-     */
-    protected function makeDirectory($path)
-    {
-        if (! $this->files->isDirectory($path)) {
-            $this->files->makeDirectory($path, 0777, true, true);
-        }
-
-        return $path;
     }
 
     /**
@@ -154,26 +148,6 @@ class ServiceConnectionCommand extends Command
     }
 
     /**
-     * Return the stub file path
-     * @return string
-     *
-     */
-    public function getStubPath()
-    {
-        return __DIR__ . '/../../../stubs/service.stub';
-    }
-
-    /**
-     * Return the stub file path controller
-     * @return string
-     *
-     */
-    public function getStubPathController()
-    {
-        return __DIR__ . '/../../../stubs/service-controller.stub';
-    }
-
-    /**
      * Map the stub variables present in stub to its value
      *
      * @return array
@@ -190,62 +164,11 @@ class ServiceConnectionCommand extends Command
     }
 
     /**
-     * Get the stub path and the stub variables
-     *
-     * @return bool|mixed|string
-     *
-     */
-    public function getSourceFile($path, $vars)
-    {
-        //return $this->getStubContents($this->getStubPath(), $this->getStubVariables());
-        return $this->getStubContents($path, $vars);
-    }
-
-
-    /**
-     * Replace the stub variables(key) with the desire value
-     *
-     * @param $stub
-     * @param array $stubVariables
-     * @return bool|mixed|string
-     */
-    public function getStubContents($stub, $stubVariables = [])
-    {
-        $contents = file_get_contents($stub);
-
-        foreach ($stubVariables as $search => $replace) {
-            $contents = str_replace('$'.$search.'$', $replace, $contents);
-        }
-
-        return $contents;
-    }
-
-    /**
-     * Get the full path of generate class
-     *
-     * @return string
-     */
-    public function getSourceFilePath()
-    {
-        return base_path('app/Services') .'/' .$this->getClassName($this->argument('name')) . 'Service.php';
-    }
-
-    /**
-     * Get the full path of generate controller
-     *
-     * @return string
-     */
-    public function getSourceFilePathController()
-    {
-        return base_path('app/Http/Controllers') .'/' .$this->getClassName($this->argument('name')) . 'Controller.php';
-    }
-
-    /**
      * Agrega las rutas de api para el controlador creado
      *
      * @return void
      */
-    public static function addRoute($controller_name, $route_name)
+    public function addRoute($controller_name, $route_name)
     {
         $file = fopen(base_path('routes/api.php'), 'r+') or die('Error');
         $use_is_added = false;
