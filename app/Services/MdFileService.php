@@ -7,6 +7,7 @@ class MdFileService extends ServiceManager
     public function __construct()
     {
         $this->base_uri = config("services.cluster_services.md_file_service.base_uri");
+        $this->access_secret = config("services.cluster_services.md_file_service.access_secret");
     }
 
     /**

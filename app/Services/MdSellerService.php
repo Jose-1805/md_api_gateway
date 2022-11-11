@@ -7,6 +7,7 @@ class MdSellerService extends ServiceManager
     public function __construct()
     {
         $this->base_uri = config("services.cluster_services.md_seller_service.base_uri");
+        $this->access_secret = config("services.cluster_services.md_seller_service.access_secret");
     }
 
     /**
