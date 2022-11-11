@@ -20,7 +20,7 @@ class MdCounterController extends Controller
     {
         $this->md_counter_service = $md_counter_service;
         // EL middleware auth_access permite el acceso con validación de autorización a las rutas
-        //$this->middleware('auth_access');
+        $this->middleware('auth_access');
         //$this->middleware('auth:sanctum');
         //$this->middleware('permission:name')->only(['func']);
     }
@@ -71,6 +71,30 @@ class MdCounterController extends Controller
     public function update(Request $request, $id)
     {
         $response = $this->md_counter_service->updateMdCounter($id, $request->all());
+        return $this->generateResponseByService($response);
+    }
+
+    /**
+     * Incrementa el contador asociado a los parámetros de búsqueda
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function increment(Request $request)
+    {
+        $response = $this->md_counter_service->incrementMdCounter($request->all());
+        return $this->generateResponseByService($response);
+    }
+
+    /**
+     * Decrementa el contador asociado a los parámetros de búsqueda
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function decrement(Request $request)
+    {
+        $response = $this->md_counter_service->decrementMdCounter($request->all());
         return $this->generateResponseByService($response);
     }
 

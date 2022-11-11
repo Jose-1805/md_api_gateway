@@ -55,6 +55,28 @@ class MdCounterService extends ServiceManager
     }
 
     /**
+     * Incrementa el contador asociado a los parámetros de búsqueda
+     *
+     * @param array $data
+     * @return array
+     */
+    public function incrementMdCounter($data): array
+    {
+        return $this->performRequest('PUT', '/api/counter/increment', $data);
+    }
+
+    /**
+     * Decrementa el contador asociado a los parámetros de búsqueda
+     *
+     * @param array $data
+     * @return array
+     */
+    public function decrementMdCounter($data): array
+    {
+        return $this->performRequest('PUT', '/api/counter/decrement', $data);
+    }
+
+    /**
      * Elimina el elemento especificado
      *
      * @param string $id

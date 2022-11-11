@@ -18,4 +18,10 @@ use Illuminate\Support\Facades\Route;
 */
 Route::apiResource('seller', MdSellerController::class);
 Route::apiResource('file', MdFileController::class);
+
+Route::prefix('counter')->group(function () {
+    Route::put("increment", [MdCounterController::class, "increment"]);
+    Route::put("decrement", [MdCounterController::class, "decrement"]);
+});
+
 Route::apiResource('counter', MdCounterController::class);
