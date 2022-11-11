@@ -2,23 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\$CLASS_NAME$Service;
+use App\Services\MdCounterService;
 use App\Traits\ApiResponser;
 use Illuminate\Http\Request;
 
-class $CLASS_NAME$Controller extends Controller
+class MdCounterController extends Controller
 {
     use ApiResponser;
     /**
      * Objeto para consumir servicio
      *
-     * @var $CLASS_NAME$Service
+     * @var MdCounterService
      */
-    public $$SERVICE_NAME$;
+    public $md_counter_service;
 
-    public function __construct($CLASS_NAME$Service $$SERVICE_NAME$)
+    public function __construct(MdCounterService $md_counter_service)
     {
-        $this->$SERVICE_NAME$ = $$SERVICE_NAME$;
+        $this->md_counter_service = $md_counter_service;
         // EL middleware auth_access permite el acceso con validación de autorización a las rutas
         //$this->middleware('auth_access');
         //$this->middleware('auth:sanctum');
@@ -32,7 +32,7 @@ class $CLASS_NAME$Controller extends Controller
      */
     public function index()
     {
-        $response = $this->$SERVICE_NAME$->get$CLASS_NAME_PLURAL$();
+        $response = $this->md_counter_service->getMdCounters();
 
         return $this->generateResponseByService($response);
     }
@@ -45,7 +45,7 @@ class $CLASS_NAME$Controller extends Controller
      */
     public function store(Request $request)
     {
-        $response = $this->$SERVICE_NAME$->create$CLASS_NAME$($request->all());
+        $response = $this->md_counter_service->createMdCounter($request->all());
         return $this->generateResponseByService($response);
     }
 
@@ -57,7 +57,7 @@ class $CLASS_NAME$Controller extends Controller
      */
     public function show($id)
     {
-        $response = $this->$SERVICE_NAME$->get$CLASS_NAME$($id);
+        $response = $this->md_counter_service->getMdCounter($id);
         return $this->generateResponseByService($response);
     }
 
@@ -70,7 +70,7 @@ class $CLASS_NAME$Controller extends Controller
      */
     public function update(Request $request, $id)
     {
-        $response = $this->$SERVICE_NAME$->update$CLASS_NAME$($id, $request->all());
+        $response = $this->md_counter_service->updateMdCounter($id, $request->all());
         return $this->generateResponseByService($response);
     }
 
@@ -82,7 +82,7 @@ class $CLASS_NAME$Controller extends Controller
      */
     public function destroy($id)
     {
-        $response = $this->$SERVICE_NAME$->destroy($id);
+        $response = $this->md_counter_service->destroy($id);
         return $this->generateResponseByService($response);
     }
 }
