@@ -20,7 +20,7 @@ class MdFileController extends Controller
     {
         $this->md_file_service = $md_file_service;
         // EL middleware auth_access permite el acceso con validación de autorización a las rutas
-        //$this->middleware('auth_access');
+        $this->middleware('auth_access');
         //$this->middleware('auth:sanctum');
         //$this->middleware('permission:name')->only(['func']);
     }
