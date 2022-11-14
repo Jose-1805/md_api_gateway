@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MdStoreController;
 use App\Http\Controllers\MdCounterController;
 use App\Http\Controllers\MdFileController;
 use App\Http\Controllers\MdSellerController;
@@ -17,11 +18,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::apiResource('seller', MdSellerController::class);
+
+Route::get('file/download/{id}', [MdFileController::class, "download"]);
 Route::apiResource('file', MdFileController::class);
 
 Route::prefix('counter')->group(function () {
     Route::put("increment", [MdCounterController::class, "increment"]);
     Route::put("decrement", [MdCounterController::class, "decrement"]);
 });
-
 Route::apiResource('counter', MdCounterController::class);
+
+Route::get('store/download-logo/{id}', [MdStoreController::class, "downloadLogo"]);
+Route::apiResource('store', MdStoreController::class);

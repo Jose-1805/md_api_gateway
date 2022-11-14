@@ -2,25 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\MdFileService;
+use App\Services\MdStoreService;
 use App\Traits\ApiResponser;
 use Illuminate\Http\Request;
 
-class MdFileController extends Controller
+class MdStoreController extends Controller
 {
     use ApiResponser;
     /**
      * Objeto para consumir servicio
      *
-     * @var MdFileService
+     * @var MdStoreService
      */
-    public $md_file_service;
+    public $md_store_service;
 
-    public function __construct(MdFileService $md_file_service)
+    public function __construct(MdStoreService $md_store_service)
     {
-        $this->md_file_service = $md_file_service;
+        $this->md_store_service = $md_store_service;
         // EL middleware auth_access permite el acceso con validación de autorización a las rutas
-        $this->middleware('auth_access');
+        //$this->middleware('auth_access');
         //$this->middleware('auth:sanctum');
         //$this->middleware('permission:name')->only(['func']);
     }
@@ -32,7 +32,7 @@ class MdFileController extends Controller
      */
     public function index()
     {
-        $response = $this->md_file_service->getMdFiles();
+        $response = $this->md_store_service->getMdStores();
 
         return $this->generateResponseByService($response);
     }
@@ -45,7 +45,7 @@ class MdFileController extends Controller
      */
     public function store(Request $request)
     {
-        $response = $this->md_file_service->createMdFile($request->all());
+        $response = $this->md_store_service->createMdStore($request->all());
         return $this->generateResponseByService($response);
     }
 
@@ -57,7 +57,7 @@ class MdFileController extends Controller
      */
     public function show($id)
     {
-        $response = $this->md_file_service->getMdFile($id);
+        $response = $this->md_store_service->getMdStore($id);
         return $this->generateResponseByService($response);
     }
 
@@ -70,7 +70,7 @@ class MdFileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $response = $this->md_file_service->updateMdFile($id, $request->all());
+        $response = $this->md_store_service->updateMdStore($id, $request->all());
         return $this->generateResponseByService($response);
     }
 
@@ -82,19 +82,19 @@ class MdFileController extends Controller
      */
     public function destroy($id)
     {
-        $response = $this->md_file_service->destroy($id);
+        $response = $this->md_store_service->destroy($id);
         return $this->generateResponseByService($response);
     }
 
     /**
-     * Descarga del archivo
+     * Descarga del logo de la tienda
      *
      * @param  int  $id
-     * @return mixed
+     * @return \Illuminate\Http\Response
      */
-    public function download($id): mixed
+    public function downloadLogo($id)
     {
-        $response = $this->md_file_service->download($id);
+        $response = $this->md_store_service->downloadLogo($id);
         return $response;
         //return $this->generateResponseByService($response);
     }

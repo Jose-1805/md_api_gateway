@@ -64,4 +64,15 @@ class MdFileService extends ServiceManager
     {
         return $this->performRequest('DELETE', '/api/file/'.$id);
     }
+
+    /**
+     * Descarga del archivo
+     *
+     * @param string $id
+     * @return mixed
+     */
+    public function download($id): mixed
+    {
+        return $this->performRequest('GET', '/api/file/download/'.$id, [], true);
+    }
 }
