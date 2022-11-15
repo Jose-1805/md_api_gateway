@@ -94,8 +94,6 @@ class MdFileController extends Controller
      */
     public function download($id): mixed
     {
-        $response = $this->md_file_service->download($id);
-        return $response;
-        //return $this->generateResponseByService($response);
+        return $this->md_file_service->download($id);
     }
 }
