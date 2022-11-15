@@ -94,6 +94,6 @@ class MdStoreController extends Controller
      */
     public function downloadLogo($id)
     {
-        $this->md_store_service->downloadLogo($id);
+        return $this->md_store_service->downloadLogo($id);
     }
 }
