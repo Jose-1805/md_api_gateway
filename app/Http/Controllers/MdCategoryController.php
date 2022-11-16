@@ -2,26 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\MdStoreService;
+use App\Services\MdCategoryService;
 use App\Traits\ApiResponser;
 use Illuminate\Http\Request;
 
-class MdStoreController extends Controller
+class MdCategoryController extends Controller
 {
     use ApiResponser;
     /**
      * Objeto para consumir servicio
      *
-     * @var MdStoreService
+     * @var MdCategoryService
      */
-    public $md_store_service;
+    public $md_category_service;
 
-    public function __construct(MdStoreService $md_store_service)
+    public function __construct(MdCategoryService $md_category_service)
     {
-        $this->md_store_service = $md_store_service;
+        $this->md_category_service = $md_category_service;
         // EL middleware auth_access permite el acceso con validación de autorización a las rutas
         //$this->middleware('auth_access');
-        $this->middleware('auth:sanctum')->except(['downloadLogo', 'index', 'show']);
+        $this->middleware('auth:sanctum')->except(['index', 'show']);
         //$this->middleware('permission:name')->only(['func']);
     }
 
@@ -32,7 +32,7 @@ class MdStoreController extends Controller
      */
     public function index()
     {
-        $response = $this->md_store_service->getMdStores();
+        $response = $this->md_category_service->getMdCategories();
 
         return $this->generateResponseByService($response);
     }
@@ -45,7 +45,7 @@ class MdStoreController extends Controller
      */
     public function store(Request $request)
     {
-        $response = $this->md_store_service->createMdStore($request->all());
+        $response = $this->md_category_service->createMdCategory($request->all());
         return $this->generateResponseByService($response);
     }
 
@@ -57,7 +57,7 @@ class MdStoreController extends Controller
      */
     public function show($id)
     {
-        $response = $this->md_store_service->getMdStore($id);
+        $response = $this->md_category_service->getMdCategory($id);
         return $this->generateResponseByService($response);
     }
 
@@ -70,7 +70,7 @@ class MdStoreController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $response = $this->md_store_service->updateMdStore($id, $request->all());
+        $response = $this->md_category_service->updateMdCategory($id, $request->all());
         return $this->generateResponseByService($response);
     }
 
@@ -82,30 +82,7 @@ class MdStoreController extends Controller
      */
     public function destroy($id)
     {
-        $response = $this->md_store_service->destroy($id);
-        return $this->generateResponseByService($response);
-    }
-
-    /**
-     * Descarga del logo de la tienda
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function downloadLogo($id)
-    {
-        return $this->md_store_service->downloadLogo($id);
-    }
-
-    /**
-     * Alterna un vendedor de una tienda
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function toggleSeller(Request $request)
-    {
-        $response = $this->md_store_service->toggleSeller($request->all());
+        $response = $this->md_category_service->destroy($id);
         return $this->generateResponseByService($response);
     }
 }

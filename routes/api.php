@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MdCategoryController;
 use App\Http\Controllers\MdStoreController;
 use App\Http\Controllers\MdCounterController;
 use App\Http\Controllers\MdFileController;
@@ -35,3 +36,5 @@ Route::prefix('store')->group(function () {
 });
 
 Route::apiResource('store', MdStoreController::class);
+
+Route::apiResource('category', MdCategoryController::class);
