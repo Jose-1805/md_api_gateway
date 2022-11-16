@@ -75,4 +75,15 @@ class MdStoreService extends ServiceManager
     {
         return $this->performRequest('GET', '/api/store/download-logo/'.$id, [], true);
     }
+
+    /**
+     * Alterna un vendedor de una tienda
+     *
+     * @param string $id
+     * @return mixed
+     */
+    public function toggleSeller($data): array
+    {
+        return $this->performRequest('PUT', '/api/store/toggle-seller', $data);
+    }
 }

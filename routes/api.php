@@ -28,5 +28,10 @@ Route::prefix('counter')->group(function () {
 });
 Route::apiResource('counter', MdCounterController::class);
 
-Route::get('store/download-logo/{id}', [MdStoreController::class, "downloadLogo"]);
+
+Route::prefix('store')->group(function () {
+    Route::put('toggle-seller', [MdStoreController::class, 'toggleSeller']);
+    Route::get('download-logo/{id}', [MdStoreController::class, "downloadLogo"]);
+});
+
 Route::apiResource('store', MdStoreController::class);

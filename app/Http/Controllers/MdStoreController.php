@@ -21,7 +21,7 @@ class MdStoreController extends Controller
         $this->md_store_service = $md_store_service;
         // EL middleware auth_access permite el acceso con validación de autorización a las rutas
         //$this->middleware('auth_access');
-        //$this->middleware('auth:sanctum');
+        $this->middleware('auth:sanctum')->except(['downloadLogo']);
         //$this->middleware('permission:name')->only(['func']);
     }
 
@@ -95,5 +95,17 @@ class MdStoreController extends Controller
     public function downloadLogo($id)
     {
         return $this->md_store_service->downloadLogo($id);
+    }
+
+    /**
+     * Alterna un vendedor de una tienda
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function toggleSeller(Request $request)
+    {
+        $response = $this->md_store_service->toggleSeller($request->all());
+        return $this->generateResponseByService($response);
     }
 }
