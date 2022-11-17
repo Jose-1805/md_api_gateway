@@ -37,18 +37,8 @@ class RolesAndPermissionsSeeder extends Seeder
 
         Permission::insert($permissions->toArray());
 
-        // Rol de super admin y permisos asignados
+        // Rol de super admin
         $role = Role::create(['name' => 'super-admin']);
-        $admin_permissions = array_merge(
-            array_diff($sellers, ['set-online-status']),
-            $stores,
-            $products,
-            ['view-customers'],
-            ["view-orders"],
-            ["view-chats"],
-            $notifications
-        );
-        $role->givePermissionTo($admin_permissions);
 
         // Rol de seller y permisos asignados
         $role = Role::create(['name' => 'seller']);
