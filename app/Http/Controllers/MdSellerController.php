@@ -25,7 +25,7 @@ class MdSellerController extends Controller
     {
         $this->md_seller_service = $md_seller_service;
         // EL middleware auth_access permite el acceso con validación de autorización a las rutas
-        //$this->middleware('auth_access');
+        $this->middleware('auth_access');
         /*$this->middleware('auth:sanctum');
         $this->middleware('permission:view-sellers')->only(['index','show']);
         $this->middleware('permission:create-sellers')->only('store');
