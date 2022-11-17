@@ -36,11 +36,17 @@ mkdir $default_path/app/Traits
 echo '### mkdir $default_path/app/Services'
 mkdir $default_path/app/Services
 
+echo '### mv Kernel.php $default_path/app/Http/Kernel.php'
+mv Kernel.php $default_path/app/Http/Kernel.php
+
 echo '### mkdir $default_path/app/Console/Commands'
 mkdir $default_path/app/Console/Commands
 
 echo '### mv ApiResponser.php $default_path/app/Traits/ApiResponser.php'
 mv ApiResponser.php $default_path/app/Traits/ApiResponser.php
+
+echo '### mv AuthenticateAccessMiddleware.php $default_path/app/Http/Middleware/AuthenticateAccessMiddleware.php'
+mv AuthenticateAccessMiddleware.php $default_path/app/Http/Middleware/AuthenticateAccessMiddleware.php
 
 echo '### mv ConsumeExternalService.php $default_path/app/Traits/ConsumeExternalService.php'
 mv ConsumeExternalService.php $default_path/app/Traits/ConsumeExternalService.php
@@ -54,6 +60,9 @@ mv Handler.php $default_path/app/Exceptions/Handler.php
 echo '### mv ServiceConnectionCommand.php $default_path/app/Console/Commands/ServiceConnectionCommand.php'
 mv ServiceConnectionCommand.php $default_path/app/Console/Commands/ServiceConnectionCommand.php
 
+echo '### mv MakeAdmin.php $default_path/app/Console/Commands/MakeAdmin.php'
+mv MakeAdmin.php $default_path/app/Console/Commands/MakeAdmin.php
+
 echo '### mv $default_path/es/ $default_path/lang/'
 mv $default_path/es/ $default_path/lang/
 
@@ -65,6 +74,9 @@ mv services.php $default_path/config/services.php
 
 echo '### mv $default_path/app.php $default_path/config/app.php'
 mv $default_path/app.php $default_path/config/app.php
+
+echo '### mv $default_path/AuthServiceProvider.php $default_path/app/Providers/AuthServiceProvider.php'
+mv $default_path/AuthServiceProvider.php $default_path/app/Providers/AuthServiceProvider.php
 
 echo '### composer require laravel/octane'
 composer require laravel/octane

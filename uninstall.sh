@@ -25,11 +25,17 @@ mv $default_path/database/migrations $tmp_path/
 echo '#### mv $default_path/database/seeders $tmp_path/'
 mv $default_path/database/seeders $tmp_path/
 
+echo '#### mv $default_path/app/Http/Kernel.php $tmp_path/Kernel.php'
+mv $default_path/app/Http/Kernel.php $tmp_path/Kernel.php
+
 echo '#### mv $default_path/app/Models/User.php $tmp_path/User.php'
 mv $default_path/app/Models/User.php $tmp_path/User.php
 
 echo '#### mv $default_path/app/Traits/ApiResponser.php $tmp_path/ApiResponser.php'
 mv $default_path/app/Traits/ApiResponser.php $tmp_path/ApiResponser.php
+
+echo '#### mv $default_path/app/Http/Middleware/AuthenticateAccessMiddleware.php $tmp_path/AuthenticateAccessMiddleware.php'
+mv $default_path/app/Http/Middleware/AuthenticateAccessMiddleware.php $tmp_path/AuthenticateAccessMiddleware.php
 
 echo '#### mv $default_path/app/Traits/ConsumeExternalService.php $tmp_path/ConsumeExternalService.php'
 mv $default_path/app/Traits/ConsumeExternalService.php $tmp_path/ConsumeExternalService.php
@@ -43,6 +49,9 @@ mv $default_path/app/Exceptions/Handler.php $tmp_path/Handler.php
 echo '#### mv $default_path/app/Console/Commands/ServiceConnectionCommand.php $tmp_path/ServiceConnectionCommand.php'
 mv $default_path/app/Console/Commands/ServiceConnectionCommand.php $tmp_path/ServiceConnectionCommand.php
 
+echo '#### mv $default_path/app/Console/Commands/MakeAdmin.php $tmp_path/MakeAdmin.php'
+mv $default_path/app/Console/Commands/MakeAdmin.php $tmp_path/MakeAdmin.php
+
 echo '#### mv $default_path/app/Http/Requests $tmp_path'
 mv $default_path/app/Http/Requests $tmp_path
 
@@ -51,6 +60,9 @@ mv $default_path/config/services.php $tmp_path/services.php
 
 echo '#### mv $default_path/config/app.php $tmp_path/app.php'
 mv $default_path/config/app.php $tmp_path/app.php
+
+echo '#### mv $default_path/app/Providers/AuthServiceProvider.php $tmp_path/AuthServiceProvider.php'
+mv $default_path/app/Providers/AuthServiceProvider.php $tmp_path/AuthServiceProvider.php
 
 echo '#### mv $default_path/dev_commands.txt $tmp_path/dev_commands.txt'
 mv $default_path/dev_commands.txt $tmp_path/dev_commands.txt
