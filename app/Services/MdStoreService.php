@@ -73,7 +73,7 @@ class MdStoreService extends ServiceManager
      */
     public function downloadLogo($id): mixed
     {
-        return $this->performRequest('GET', '/api/store/download-logo/'.$id, [], true);
+        return $this->performRequest('GET', '/api/store/'.$id.'/logo', [], true);
     }
 
     /**

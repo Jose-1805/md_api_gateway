@@ -32,6 +32,7 @@ return [
     ],
 
     'cluster_services' => [
+        'md_product_service' => ['base_uri' => env('MD_PRODUCT_SERVICE_BASE_URL'), 'access_secret' => env('MD_PRODUCT_SERVICE_ACCESS_SECRET')],
         'md_category_service' => ['base_uri' => env('MD_CATEGORY_SERVICE_BASE_URL'), 'access_secret' => env('MD_CATEGORY_SERVICE_ACCESS_SECRET')],
         'md_store_service' => ['base_uri' => env('MD_STORE_SERVICE_BASE_URL'), 'access_secret' => env('MD_STORE_SERVICE_ACCESS_SECRET')],
         'md_counter_service' => ['base_uri' => env('MD_COUNTER_SERVICE_BASE_URL'), 'access_secret' => env('MD_COUNTER_SERVICE_ACCESS_SECRET')],

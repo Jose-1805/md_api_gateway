@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MdProductController;
 use App\Http\Controllers\MdCategoryController;
 use App\Http\Controllers\MdStoreController;
 use App\Http\Controllers\MdCounterController;
@@ -32,9 +33,11 @@ Route::apiResource('counter', MdCounterController::class);
 
 Route::prefix('store')->group(function () {
     Route::put('toggle-seller', [MdStoreController::class, 'toggleSeller']);
-    Route::get('download-logo/{id}', [MdStoreController::class, "downloadLogo"]);
+    Route::get('{id}/logo', [MdStoreController::class, "downloadLogo"]);
 });
 
 Route::apiResource('store', MdStoreController::class);
 
 Route::apiResource('category', MdCategoryController::class);
+
+Route::apiResource('product', MdProductController::class);
